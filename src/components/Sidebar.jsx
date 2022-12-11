@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable no-unused-vars */
 /* eslint-disable quotes */
 import { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
