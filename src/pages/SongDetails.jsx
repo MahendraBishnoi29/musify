@@ -5,6 +5,7 @@
 /* eslint-disable quotes */
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import DetailsHeader from "../components/DetailsHeader";
 import { setActiveSong, playPause } from "../redux/features/playerSlice";
 import { useGetSongDetailsQuery } from "../redux/services/shazamCore";
 
@@ -18,7 +19,7 @@ const SongDetails = () => {
 
   return (
     <div className="flex flex-col">
-      {/* <DetailHeader artistId={artistId} songData={songData} /> */}
+      <DetailsHeader artistId="" songData={songData} />
 
       <div className="mb-10">
         <h2 className="text-white text-3xl font-bold">Lyrics</h2>
