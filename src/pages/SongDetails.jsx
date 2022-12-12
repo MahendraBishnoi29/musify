@@ -1,3 +1,6 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable curly */
+/* eslint-disable nonblock-statement-body-position */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable operator-linebreak */
@@ -5,9 +8,13 @@
 /* eslint-disable quotes */
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Error, Loader, RelatedSongs } from "../components";
 import DetailsHeader from "../components/DetailsHeader";
 import { setActiveSong, playPause } from "../redux/features/playerSlice";
-import { useGetSongDetailsQuery } from "../redux/services/shazamCore";
+import {
+  useGetRelatedSongsQuery,
+  useGetSongDetailsQuery,
+} from "../redux/services/shazamCore";
 
 const SongDetails = () => {
   const { songid } = useParams();
@@ -16,6 +23,25 @@ const SongDetails = () => {
 
   const { data: songData, isFetching: isFetchingSongDetails } =
     useGetSongDetailsQuery({ songid });
+  const {
+    data,
+    isFetching: isFetchingRelatedSongs,
+    error,
+  } = useGetRelatedSongsQuery({ songid });
+
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+
+  const handlePlayClick = (song, i) => {
+    dispatch(setActiveSong({ song, data, i }));
+    playPause(true);
+  };
+
+  if (isFetchingSongDetails || isFetchingRelatedSongs)
+    return <Loader title="Searching Releated Songs..." />;
+
+  if (error) return <Error />;
 
   return (
     <div className="flex flex-col">
@@ -35,6 +61,14 @@ const SongDetails = () => {
           )}
         </div>
       </div>
+
+      <RelatedSongs
+        data={data}
+        isPlaying={isPlaying}
+        activeSong={activeSong}
+        handlePauseClick={handlePauseClick}
+        handlePlayClick={handlePlayClick}
+      />
     </div>
   );
 };
