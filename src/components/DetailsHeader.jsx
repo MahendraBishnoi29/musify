@@ -1,10 +1,9 @@
 /* eslint-disable quotes */
 /* eslint-disable arrow-body-style */
 /* eslint-disable indent */
-
+/* eslint-disable quotes */
 import { Link } from "react-router-dom";
 
-/* eslint-disable quotes */
 const DetailsHeader = ({ artistId, artistData, songData }) => {
   const artist = artistData?.artists[artistId]?.attributes;
 
