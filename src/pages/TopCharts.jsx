@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { Error, Loader, SongCard } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 
-const TopArtists = () => {
+const TopCharts = () => {
   const { isPlaying, activeSong } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetTopChartsQuery();
 
@@ -39,4 +39,4 @@ const TopArtists = () => {
   );
 };
 
-export default TopArtists;
+export default TopCharts;
