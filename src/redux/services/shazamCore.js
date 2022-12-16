@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable comma-dangle */
 /* eslint-disable quotes */
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -31,6 +32,10 @@ export const shazamCoreApi = createApi({
     getAroundYouSongs: builder.query({
       query: (countryCode) => `/charts/country?country_code=${countryCode}`,
     }),
+    getSongsBySearch: builder.query({
+      query: (searchTerm) =>
+        `/search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}`,
+    }),
   }),
 });
 
@@ -41,4 +46,5 @@ export const {
   useGetRelatedSongsQuery,
   useGetArtistDetailsQuery,
   useGetAroundYouSongsQuery,
+  useGetSongsBySearchQuery,
 } = shazamCoreApi;
